@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
 import { AuthCallbackPage } from "./pages/AuthCallbackPage";
 import { ContactsPage } from "./pages/ContactsPage";
+import { Footer } from "./components/Footer";
 
 export const App = () => {
   return (
@@ -22,6 +23,7 @@ export const App = () => {
         />
         <Route path="/auth-callback" element={<AuthCallbackPage />} />
       </Routes>
+      <Footer />
     </>
   );
 };
