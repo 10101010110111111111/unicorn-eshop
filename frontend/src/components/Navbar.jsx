@@ -53,10 +53,10 @@ export const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/contact"
+            to="/contacts"
             className={({ isActive }) => (isActive ? activeStyle : baseStyle)}
           >
-            Contact
+            Contacts
           </NavLink>
         </li>
       </ul>
@@ -84,7 +84,6 @@ export const Navbar = () => {
                   userButtonAvatarBox: "w-8 h-8",
                 },
               }}
-              afterSignOutUrl="/"
             />
 
             <Link
