@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { Search, ShoppingCart } from "lucide-react";
 import { useAuth, UserButton } from "@clerk/clerk-react";
 import { SignInOAuthButton } from "./SignInOAuthButton.jsx";
@@ -10,8 +10,22 @@ export const Navbar = () => {
     "hover:text-cyan-400 hover:underline underline-offset-4 transition-all duration-300 ease-in-out";
 
   const { isSignedIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [search, setSearch] = useState("");
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams(location.search);
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
+
+    navigate(`/products?${params.toString()}`);
+  };
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-[#1a1a1a] px-6 py-5 flex items-center justify-between shadow-md">
@@ -48,25 +62,30 @@ export const Navbar = () => {
       </ul>
 
       <div className="flex space-x-4 items-center text-white">
-        <div className="flex items-center bg-[#2a2a2a] px-2 py-1 rounded-md focus-within:ring-2 focus-within:ring-cyan-400 transition-all duration-300">
+        <form
+          onSubmit={handleSearch}
+          className="flex items-center bg-[#2a2a2a] px-2 py-1 rounded-md focus-within:ring-2 focus-within:ring-cyan-400 transition-all duration-300"
+        >
           <Search size={18} className="text-gray-400 mr-2" />
           <input
             type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search..."
             className="bg-transparent outline-none text-lg text-white placeholder-gray-500"
           />
-        </div>
+        </form>
 
         {isSignedIn ? (
           <>
-            <Link
-              to="/login"
-              className="hover:text-cyan-400 transition-colors duration-200"
-            >
-              <UserButton />
-            </Link>
+            <UserButton
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: "w-8 h-8",
+                },
+              }}
+              afterSignOutUrl="/"
+            />
 
             <Link
               to="/cart"
