@@ -75,7 +75,6 @@ export const Filters = () => {
     sizes: "Size",
     colors: "Color",
     brands: "Brand",
-    categories: "Category",
   };
 
   return (
