@@ -1,6 +1,5 @@
 import { axiosInstance } from "../lib/axios";
 import { create } from "zustand";
-import { toast } from "react-hot-toast";
 
 export const useProductStore = create((set) => ({
   products: [],
@@ -43,50 +42,6 @@ export const useProductStore = create((set) => ({
       set({ currentProduct: data });
     } catch (error) {
       set({ error: error.message });
-    } finally {
-      set({ isLoading: false });
-    }
-  },
-
-  addProduct: async (formData) => {
-    set({ isLoading: true, error: null });
-    try {
-      await axiosInstance.post("/admin/products", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      toast.success("Product added successfully");
-    } catch (error) {
-      set({ error: error.message });
-      toast.error("Failed to add product");
-    } finally {
-      set({ isLoading: false });
-    }
-  },
-
-  deleteProduct: async (id) => {
-    set({ isLoading: true, error: null });
-    try {
-      await axiosInstance.delete(`/admin/products/${id}`);
-      toast.success("Product deleted successfully");
-    } catch (error) {
-      set({ error: error.message });
-      toast.error("Failed to delete product");
-    } finally {
-      set({ isLoading: false });
-    }
-  },
-
-  setQuantity: async (id, quantity) => {
-    set({ isLoading: true, error: null });
-    try {
-      await axiosInstance.patch(`/admin/products/setQuantity`, {
-        id,
-        quantity,
-      });
-      toast.success("Quantity updated successfully");
-    } catch (error) {
-      set({ error: error.message });
-      toast.error("Failed to update quantity");
     } finally {
       set({ isLoading: false });
     }
