@@ -54,7 +54,7 @@ export const ProductsPage = () => {
                     ${product.price}
                   </span>
                   <Link
-                    to={`/product/${product._id}`}
+                    to={`/products/${product._id}`}
                     className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-md text-sm transition-colors"
                   >
                     View →
