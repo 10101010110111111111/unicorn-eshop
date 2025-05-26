@@ -27,10 +27,6 @@ export const ProductsPage = () => {
       </aside>
 
       <main className="w-4/5 overflow-y-auto">
-        <h1 className="text-4xl font-light mb-10 text-center">
-          Explore Products
-        </h1>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
           {products.map((product) => (
             <motion.div
