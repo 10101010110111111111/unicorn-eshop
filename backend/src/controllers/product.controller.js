@@ -62,20 +62,16 @@ export const getProductById = async (req, res, next) => {
 
 export const getProductFilters = async (req, res, next) => {
   try {
-    const { filter } = buildProductQuery(req.query);
-
-    const sizes = await Product.distinct("size", filter);
-    const colors = await Product.distinct("color", filter);
-    const brands = await Product.distinct("brand", filter);
-    const categories = await Product.distinct("category", filter);
-    const genders = await Product.distinct("gender", filter);
+    const sizes = await Product.distinct("size");
+    const colors = await Product.distinct("color");
+    const brands = await Product.distinct("brand");
+    const genders = await Product.distinct("gender");
 
     res.status(200).json({
       filters: {
         sizes: sizes.filter(Boolean).sort(),
         colors: colors.filter(Boolean).sort(),
         brands: brands.filter(Boolean).sort(),
-        categories: categories.filter(Boolean).sort(),
         genders: genders.filter(Boolean).sort(),
       },
     });
