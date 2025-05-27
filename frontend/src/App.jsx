@@ -6,12 +6,14 @@ import { AuthCallbackPage } from "./pages/AuthCallbackPage";
 import { ContactsPage } from "./pages/ContactsPage";
 import { Footer } from "./components/Footer";
 import { ProductDetailsPage } from "./pages/ProductDetailsPage";
+import { HomePage } from "./pages/HomePage";
 
 export const App = () => {
   return (
     <>
       <Navbar />
       <Routes>
+        
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<ProductDetailsPage />} />
